@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+<!--        <record id="action_reports_partnerledger_branch" model="ir.actions.report">-->
+<!--            <field name="name">Partner Ledger Branch</field>-->
+<!--            <field name="model">account.branch.partner.ledger</field>-->
+<!--            <field name="report_type">qweb-pdf</field>-->
+<!--            <field name="report_name">branch_wise_partner_ledgers.report_partnerledger_branch</field>-->
+<!--            <field name="report_file">branch_wise_partner_ledgers.report_partnerledger_branch</field>-->
+<!--        </record>-->
+
+        <record id="action_branch_partner_report" model="ir.actions.report">
+            <field name="name">Partner Ledger Branch</field>
+            <field name="model">account.move.line</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">branch_wise_partner_ledgers.report_partnerledger_branch</field>
+            <field name="report_file">branch_wise_partner_ledgers.report_partnerledger_branch</field>
+        </record>
+         <report id="action_branch_partner_reports"
+                model="account.move.line"
+                string="Partner Ledger Branch Wise"
+                report_type="qweb-pdf"
+                name="branch_wise_partner_ledgers.report_partnerledger_branch"
+                file="branch_wise_partner_ledgers.report_partnerledger_branch"/>
+
+   </data>
+</odoo>

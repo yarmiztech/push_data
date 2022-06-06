@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <template id="session_report">
+            <t t-call="web.basic_layout">
+                <div class="page">
+                    <t t-foreach="docs" t-as="product">
+                        <!--                        <t t-call="product.report_simple_label">-->
+                        <t t-set="product" t-value="product"/>
+                        <div style="width: 32%;  height:14rem;padding-right:30px;">
+                            <table class="table  mb-0" style="font-size:12px;">
+                                <tr>
+
+                                    <td colspan="3" class="text-center">
+                                        <strong>
+                                            END OF THE DAY REPORT
+                                        </strong>
+
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td>
+                                        <strong>From Date</strong>
+                                    </td>
+                                    <td class="text-right" colspan="2"><t t-esc="product.from_date"/></td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong>To Date</strong>
+
+                                    </td>
+                                    <td class="text-right" colspan="2"><t t-esc="product.to_date"/></td>
+                                </tr>
+
+
+
+                                <tr>
+                                    <th class="text-center">Sessions</th>
+                                    <th class="text-center">Cash</th>
+                                    <th class="text-center">Bank</th>
+                                </tr>
+                                <t t-foreach="product.one_to_many" t-as="session_lines">
+                                    <t t-foreach="session_lines" t-as="session">
+                                        <tr>
+
+
+                                            <td class="text-left"><t t-esc="session.sessions"/></td>
+
+                                            <td class="text-right"><t t-esc="('%.2f'%(session.cash))"/></td>
+                                            <!--                                 </t>-->
+                                            <td class="text-right"><t t-esc="('%.2f'%(session.bank))"/></td>
+                                        </tr>
+
+                                    </t>
+                                </t>
+
+
+                                <tr>
+                                    <td class="text-left"><strong>TOTAL</strong></td>
+                                    <td class="text-right"><strong><t t-esc="('%.2f'%(sum(product.one_to_many.mapped('cash'))))"/></strong></td>
+                                    <td class="text-right"><strong><t t-esc="('%.2f'%(sum(product.one_to_many.mapped('bank'))))"/></strong></td>
+                                </tr>
+                                <tr>
+                                    <td class="text-left" colspan="2"><strong>GRAND TOTAL</strong></td>
+                                    <td class="text-right"><strong><t t-esc="('%.2f'%(sum(product.one_to_many.mapped('cash'))+sum(product.one_to_many.mapped('bank'))))"/></strong></td>
+                                </tr>
+                                <tr>
+                                    <td class="text-left" colspan="2"><strong>TAX AMOUNT</strong></td>
+                                    <td class="text-right"><strong><t t-esc="('%.2f'%((sum(product.one_to_many.mapped('cash'))+sum(product.one_to_many.mapped('bank')))*(100.00/115.00)*0.15))"/></strong></td>
+                                </tr>
+
+                            </table>
+                            <table class="table  mb-0" style="font-size:12px;">
+<!--                                <t t-set="session_details" t-value="product.get_session_data(session_lines)"/>-->
+                                <tr>
+                                    <td colspan="3" class="text-center">
+                                        <strong>
+                                            General
+                                        </strong>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th colspan="2" style="text-align:left">Name</th>
+                                    <th>Price</th>
+                                </tr>
+                                <tr>
+                                    <td colspan="2" style="text-align:left">Gross Sales</td>
+                                    <td>SR <t t-esc="('%.2f'%(sum(product.one_to_many.mapped('cash'))+sum(product.one_to_many.mapped('bank'))))"/></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2" style="text-align:left">Gross Sales Without Tax</td>
+                                    <td>SR <t t-esc="('%.2f'%(sum(product.one_to_many.mapped('cash'))+sum(product.one_to_many.mapped('bank'))-((sum(product.one_to_many.mapped('cash'))+sum(product.one_to_many.mapped('bank')))*(100/115)*(15/100))))"/></td>
+                                </tr>
+<!--                                <tr>-->
+<!--                                    <td>Total Discounts</td>-->
+<!--                                    <td>208</td>-->
+<!--                                    <td>SAR 3,788.00</td>-->
+<!--                                </tr>-->
+                                <tr>
+                                    <td colspan="2" style="text-align:left">Total Taxes</td>
+                                    <td>SR <t t-esc="('%.2f'%(sum(product.one_to_many.mapped('cash'))+sum(product.one_to_many.mapped('bank'))-(sum(product.one_to_many.mapped('cash'))+sum(product.one_to_many.mapped('bank')))*(100.00/115.00)))"/></td>
+                                </tr>
+                                <tr>
+                                    <t t-set="session_details" t-value="product.get_session_discount(product)"/>
+                                    <td colspan="2" style="text-align:left">Discount</td>
+                                    <td>SR <t t-esc="('%.2f'%(session_details))"/> </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2" style="text-align:left">Net Sales Without Tax</td>
+                                    <td>SR <t t-esc="('%.2f'%(sum(product.one_to_many.mapped('cash'))+sum(product.one_to_many.mapped('bank'))-((sum(product.one_to_many.mapped('cash'))+sum(product.one_to_many.mapped('bank')))*(100/115)*(15/100))))"/></td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align:left" colspan="2">Net Sales With Tax</td>
+                                    <td>SR <t t-esc="('%.2f'%(sum(product.one_to_many.mapped('cash'))+sum(product.one_to_many.mapped('bank'))-((sum(product.one_to_many.mapped('cash'))+sum(product.one_to_many.mapped('bank')))*(100/115)*(15/100))+((sum(product.one_to_many.mapped('cash'))+sum(product.one_to_many.mapped('bank')))*(100/115)*(15/100))))"/></td>
+                                </tr>
+
+<!--                                <tr>-->
+<!--                                    <td>Guest Count</td>-->
+<!--                                    <td>208</td>-->
+<!--                                    <td>SAR 3,788.00</td>-->
+<!--                                </tr>-->
+                                <tr>
+                                    <td style="text-align:left" colspan="2">Customer Count</td>
+                                    <td><t t-esc="sum(product.one_to_many.mapped('customer_count'))"/></td>
+                                </tr>
+<!--                                <tr>-->
+<!--                                    <td style="text-align:left" colspan="2">Average Per Order</td>-->
+<!--                                    <td>SAR <t t-esc="('%.2f'%(((sum(product.one_to_many.mapped('cash'))+sum(product.one_to_many.mapped('bank'))-((sum(product.one_to_many.mapped('cash'))+sum(product.one_to_many.mapped('bank')))*(100/115)*(15/100))))/sum(product.one_to_many.mapped('customer_count'))))"/></td>-->
+<!--                                </tr>-->
+                                <tr>
+                                    <td colspan="2">Average Per Count</td>
+                                    <td>SR <t t-esc="('%.2f'%(((sum(product.one_to_many.mapped('cash'))+sum(product.one_to_many.mapped('bank'))-((sum(product.one_to_many.mapped('cash'))+sum(product.one_to_many.mapped('bank')))*(100/115)*(15/100))))/sum(product.one_to_many.mapped('customer_count'))))"/></td>
+<!--                                    <td>SAR <t t-esc="('%.2f'%((sum(product.one_to_many.mapped('cash'))+sum(product.one_to_many.mapped('bank'))-((sum(product.one_to_many.mapped('cash'))+sum(product.one_to_many.mapped('bank')))*(100/115)*(15/100)))/quantity))"/></td>-->
+                                </tr>
+<!--                                <tr>-->
+<!--                                    <td>Total Void</td>-->
+<!--                                    <td>208</td>-->
+<!--                                    <td>SAR 3,788.00</td>-->
+<!--                                </tr>-->
+<!--                                <tr>-->
+<!--                                    <td>Rounding</td>-->
+<!--                                    <td>208</td>-->
+<!--                                    <td>SAR 3,788.00</td>-->
+<!--                                </tr>-->
+                            </table>
+                            <br /><br /><br />
+                            <t t-foreach="product.one_to_many" t-as="session_lines">
+                                <table class="table  mb-0" style="font-size:12px;">
+                                    <tr>
+                                        <td colspan="3" class="text-center">
+                                            <strong>
+                                                <t t-esc="session_lines.sessions"/>
+
+                                                <t t-set="session_data" t-value="product.get_session_data(session_lines)"/>
+<!--                                                [<span t-esc="session_data"/> ]-->
+
+
+                                            </strong>
+                                        </td>
+                                    </tr>
+
+
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Quantity</th>
+                                        <th>Price</th>
+                                    </tr>
+                                    <t t-foreach="session_data.picking_ids.move_line_ids_without_package.mapped('product_id').mapped('pos_categ_id')" t-as="categ_id">
+                                    <tr>
+                                        <td><t t-esc="categ_id.name"/></td>
+                                        <td><t t-esc="product.get_pos_categ_quantity(session_data,categ_id)"/></td>
+                                        <td>SAR <t t-esc="session_data.get_pos_categ_amount(session_data,categ_id)"/></td>
+                                    </tr>
+                                    </t>
+                                </table>
+                            </t>
+                        </div>
+
+                    </t>
+                </div>
+            </t>
+
+        </template>
+    </data>
+</odoo>

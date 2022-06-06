@@ -1,0 +1,10 @@
+<odoo>
+<!--    <template id="assets" inherit_id="point_of_sale.assets">-->
+<!--        <xpath expr="." position="inside">-->
+<!--&lt;!&ndash;            <script type="text/javascript" src="/l10n_sa_pos/static/src/lib/zxing.js"></script>&ndash;&gt;-->
+<!--&lt;!&ndash;            <script type="text/javascript" src="/l10n_sa_pos/static/src/js/OrderReceipt.js"></script>&ndash;&gt;-->
+<!--        </xpath>-->
+<!--    </template>-->
+
+
+</odoo>

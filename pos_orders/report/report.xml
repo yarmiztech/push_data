@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+<!--    <record id="ppf" model="report.paperformat">-->
+<!--        <field name="name">A4 with</field>-->
+<!--        <field name="default" eval="True" />-->
+<!--        <field name="format">A4</field>-->
+<!--        <field name="page_height">0</field>-->
+<!--        <field name="page_width">0</field>-->
+<!--        <field name="orientation">Portrait</field>-->
+<!--        &lt;!&ndash;    <field name="margin_top">110</field>&ndash;&gt;-->
+<!--        <field name="margin_top">60</field>-->
+<!--        <field name="margin_bottom">30</field>-->
+<!--        <field name="margin_left">9</field>-->
+<!--        <field name="margin_right">9</field>-->
+<!--        <field name="header_line" eval="False" />-->
+<!--        &lt;!&ndash;    <field name="header_spacing">105</field>&ndash;&gt;-->
+<!--        <field name="header_spacing">40 </field>-->
+<!--        <field name="dpi">90</field>-->
+<!--    </record>-->
+    <record id="session_report_print0" model="ir.actions.report">
+        <field name="name">Session Report</field>
+        <field name="model">day.book</field>
+
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">pos_orders.session_report</field>
+        <field name="report_file">pos_orders.session_report</field>
+        <!--        <field name="print_report_name">'POS Labels - %s' % (object.name)</field>-->
+        <field name="binding_model_id" ref="pos_orders.model_day_book"/>
+        <field name="binding_type">report</field>
+<!--        <field name="paperformat_id">pos_orders.ppf</field>-->
+    </record>
+
+</odoo>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <record id="hr_loan_form_view_journal" model="ir.ui.view">
+        <field name="name">hr.loan.form</field>
+        <field name="model">hr.loan</field>
+        <field name="inherit_id" ref="ohrms_loan.hr_loan_form_view"/>
+        <field name="arch" type="xml">
+            <div class="oe_button_box" position="inside">
+
+<!--                <div class="oe_button_box" name="button_box">-->
+                    <field name="loan_move_id" invisible="1"/>
+                    <button name="action_created_invoice"
+                            type="object"
+                            class="oe_stat_button"
+                            icon="fa-pencil-square-o"
+                            attrs="{'invisible': [('loan_move_id', '=', False)]}"
+                            groups="account.group_account_invoice">
+                        <div class="o_field_widget o_stat_info">
+                            <span class="o_stat_text">Journals</span>
+                        </div>
+                    </button>
+                </div>
+
+
+            <!--    <form string="Loan Request">-->
+            <xpath expr="//button[@name='action_submit']" position="after">
+                <button name="action_approve_journal" type="object" string="Create Journal" class="oe_highlight"
+                        attrs="{'invisible': ['|',('journal_created', '=', True),('state', '!=', 'approve')]}"
+                />
+            </xpath>
+            <xpath expr="//field[@name='department_id']" position="after">
+                <field name="payment_journal"/>
+                <field name="journal_created" invisible="1"/>
+
+            </xpath>
+        </field>
+    </record>
+</odoo>
+

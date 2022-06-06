@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!--    <report-->
+    <!--            id="pos_orders"-->
+    <!--            model="pos.order"-->
+    <!--            string="Receipts"-->
+    <!--            report_type="qweb-pdf"-->
+    <!--            name="orders_reprinting_pos.receipt_report"-->
+    <!--            file="orders_reprinting_pos.receipt_report"-->
+    <!--        />-->
+
+    <!--&lt;!&ndash;            report_type="qweb-html"&ndash;&gt;-->
+
+    <!--     <report id="pos_receipt_report"-->
+    <!--      		model="pos.order"-->
+    <!--      		string="Receipt"-->
+    <!--      		report_type="qweb-pdf"-->
+    <!--      		name="point_of_sale.report_receipts"-->
+    <!--      		file="point_of_sale.report_receipts"/>-->
+    <!--&lt;!&ndash;			paperformat="new.paperformat_a4"/>&ndash;&gt;-->
+    <!--&lt;!&ndash;    <record id="pos_receipt_report" model="ir.actions.report.xml">&ndash;&gt;-->
+    <!--&lt;!&ndash;        <field name="name">Receipt</field>&ndash;&gt;-->
+    <!--&lt;!&ndash;        <field name="model">pos.order</field>&ndash;&gt;-->
+    <!--&lt;!&ndash;        <field name="report_type">qweb-pdf</field>&ndash;&gt;-->
+    <!--&lt;!&ndash;        <field name="report_name">point_of_sale.report_receipts</field>&ndash;&gt;-->
+    <!--&lt;!&ndash;    </record>&ndash;&gt;-->
+    <record id="view_pos_order_form_inherit" model="ir.ui.view">
+        <field name="name">view_pos_order_updated</field>
+        <field name="model">pos.order</field>
+        <field name="inherit_id" ref="point_of_sale.view_pos_order_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='partner_id']" position="after">
+                <field name="currency_id"/>
+            </xpath>
+        </field>
+    </record>
+
+    <!--     <record id="view_pos_details_wizard" model="ir.ui.view">-->
+<!--    <record id="view_pos_details_wizard_inherit" model="ir.ui.view">-->
+<!--        <field name="name">pos.details.wizard</field>-->
+<!--        <field name="model">pos.details.wizard</field>-->
+<!--        <field name="inherit_id" ref="point_of_sale.view_pos_details_wizard"/>-->
+<!--        <field name="arch" type="xml">-->
+<!--            <xpath expr="//button[@name='generate_report']" position="after">-->
+<!--                <button name="generate_report_categ" string="Strawberry Print" type="object" class="btn-primary"/>-->
+
+<!--            </xpath>-->
+<!--        </field>-->
+<!--    </record>-->
+</odoo>

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+<!--     <record id="label_pos_ezp" model="ir.actions.report">-->
+<!--            <field name="name">POS Receipt (ZPL)</field>-->
+<!--            <field name="model">pos.session</field>-->
+<!--            <field name="report_type">qweb-text</field>-->
+<!--            <field name="report_name">orders_reprinting_poss.label_pos_view</field>-->
+<!--            <field name="report_file">orders_reprinting_poss.label_pos_view</field>-->
+<!--            <field name="binding_model_id" ref="point_of_sale.model_pos_session"/>-->
+<!--            <field name="binding_type">report</field>-->
+<!--        </record>-->
+     <record id="report_pos_pdf_label" model="ir.actions.report">
+            <field name="name">POS Label (PDF)</field>
+            <field name="model">pos.session</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">orders_reprinting_poss.report_poslabel</field>
+            <field name="report_file">orders_reprinting_poss.report_poslabel</field>
+            <field name="print_report_name">'POS Labels - %s' % (object.name)</field>
+            <field name="binding_model_id" ref="point_of_sale.model_pos_session"/>
+            <field name="binding_type">report</field>
+        </record>
+<!--    <record id="sale_details_report_categ" model="ir.actions.report">-->
+<!--            <field name="name">Sales Details Category</field>-->
+<!--            <field name="model">report.point_of_sale.report_saledetails</field>-->
+<!--            <field name="report_type">qweb-pdf</field>-->
+<!--            <field name="report_name">orders_reprinting_pos.report_saledetails_categ</field>-->
+<!--            <field name="report_file">orders_reprinting_pos.report_saledetails_categ</field>-->
+<!--            <field name="print_report_name">'POS Categ - %s' % (object.name)</field>-->
+<!--            <field name="binding_model_id" ref="report_categ_report_saledetails_categ"/>-->
+<!--            <field name="binding_type">report</field>-->
+<!--        </record>-->
+
+
+<!--      <record id="sale_details_report_categ" model="ir.actions.report">-->
+<!--            <field name="name">Sales Details Category</field>-->
+<!--            <field name="model">pos.session</field>-->
+<!--            <field name="report_type">qweb-pdf</field>-->
+<!--            <field name="report_name">orders_reprinting_pos.report_poslabel</field>-->
+<!--            <field name="report_file">orders_reprinting_pos.report_poslabel</field>-->
+<!--            <field name="print_report_name">'POS Labels - %s' % (object.name)</field>-->
+<!--            <field name="binding_model_id" ref="point_of_sale.model_pos_session"/>-->
+<!--            <field name="binding_type">report</field>-->
+<!--        </record>-->
+
+    <record id="sale_details_report_categ" model="ir.actions.report">
+        <field name="name">Sales Details Category</field>
+        <field name="model">report.point_of_sale.report_saledetails</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">orders_reprinting_poss.report_saledetails_categ</field>
+         <field name="binding_type">report</field>
+    </record>
+</odoo>

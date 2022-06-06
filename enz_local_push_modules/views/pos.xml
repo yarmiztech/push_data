@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+     <record id="view_pos_session_form_syn" model="ir.ui.view">
+        <field name="name">pos.session.form.view</field>
+        <field name="model">pos.session</field>
+        <field name="inherit_id" ref="point_of_sale.view_pos_session_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//button[@name='open_cashbox_pos']" position="after">
+                <field name="pushed" invisible="1"/>
+                    <button name="push_to_main" type="object" string="Push To Main" class="btn-success"
+                        attrs="{'invisible' : [('pushed', '=', True)]}"/>
+            </xpath>
+        </field>
+     </record>
+</odoo>

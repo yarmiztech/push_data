@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="pos_order_form_branch" model="ir.ui.view">
+        <field name="name">pos.order.form.inherit</field>
+        <field name="model">pos.order</field>
+        <field name="inherit_id" ref="point_of_sale.view_pos_pos_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='user_id']" position='after'>
+                <field name="branch_id"/>
+            </xpath>
+        </field>
+    </record>
+    <record id="pos_user_inherit_straw" model="ir.ui.view">
+        <field name="name">POs User Inherit</field>
+        <field name="model">res.users</field>
+        <field name="inherit_id" ref="base.view_users_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//group/field[@name='partner_id']" position="after">
+<!--                 <label for="branch_id" string="Branch"/>-->
+                <field name="branch_id"/>
+            </xpath>
+<!--            <field name="signature" position="before">-->
+<!--                        <field name="notification_type" widget="radio"/>-->
+<!--                    </field>-->
+        </field>
+    </record>
+
+    <record id="pos_config_view_form_branch" model="ir.ui.view">
+        <field name="name">pos.config.form.view.inherit.pos_adyen</field>
+        <field name="model">pos.config</field>
+        <field name="inherit_id" ref="point_of_sale.pos_config_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='name']" position="after">
+                <!--                 <div class="o_setting_right_pane">-->
+                <div>
+                    <label for="branch_id"/>
+                    <field name="branch_id"/>
+                    <!--                                </div>-->
+                </div>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_report_pos_order_pivot_inherit" model="ir.ui.view">
+        <field name="name">report.pos.order.pivot</field>
+        <field name="model">report.pos.order</field>
+        <field name="inherit_id" ref="point_of_sale.view_report_pos_order_pivot"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='product_qty']" position="before">
+                <field name="branch_id" type="measure"/>
+            </xpath>
+        </field>
+    </record>
+
+
+    <record id="view_pos_details_wizard_branch" model="ir.ui.view">
+        <field name="name">pos.details.wizard.form</field>
+        <field name="model">pos.details.wizard</field>
+        <field name="inherit_id" ref="point_of_sale.view_pos_details_wizard"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='end_date']" position="after">
+                <field name="branch_id"  widget="many2many_tags"/>
+            </xpath>
+        </field>
+    </record>
+
+
+    <record id="view_pos_config_tree_branch" model="ir.ui.view">
+        <field name="name">pos.config.tree.view</field>
+        <field name="model">pos.config</field>
+        <field name="inherit_id" ref="point_of_sale.view_pos_config_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='name']" position="after">
+                <field name="branch_id"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

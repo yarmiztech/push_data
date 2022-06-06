@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_day_book,day.book,model_day_book,,1,1,1,1
+access_day_book_lines,day.book.lines,model_day_book_lines,,1,1,1,1

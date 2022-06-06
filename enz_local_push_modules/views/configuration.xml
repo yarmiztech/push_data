@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="synch_configuration_tree" model="ir.ui.view">
+        <field name="name">Synch Configuration</field>
+        <field name="model">synch.configuration</field>
+        <field name="arch" type="xml">
+            <tree string="Synch">
+                <field name="server"/>
+                <field name="db"/>
+                <field name="username"/>
+                <field name="password"/>
+                <field name="activate"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="synch_configuration_config_action" model="ir.actions.act_window">
+        <field name="name">Synch Configuration</field>
+        <field name="res_model">synch.configuration</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                No Configuration!.
+            </p>
+        </field>
+    </record>
+
+
+    <menuitem name="Synch Configuration"
+              id="synch_configuration_configuration" sequence="5"
+              parent="point_of_sale.menu_point_config_product" action="synch_configuration_config_action"
+    />
+
+</odoo>
